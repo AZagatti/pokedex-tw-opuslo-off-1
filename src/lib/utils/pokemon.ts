@@ -30,6 +30,15 @@ export function officialArtwork(pokemon: Pokemon): string | null {
   );
 }
 
+/**
+ * Lightweight sprite for grid cards. The pixel `front_default` is ~0.6 KB vs
+ * ~200 KB for official artwork, keeping the image-heavy list fast (a big LCP
+ * win). Detail pages still use the full-resolution artwork.
+ */
+export function cardSprite(pokemon: Pokemon): string | null {
+  return pokemon.sprites.front_default ?? officialArtwork(pokemon);
+}
+
 export const STAT_LABELS: Record<string, string> = {
   hp: "HP",
   attack: "Attack",

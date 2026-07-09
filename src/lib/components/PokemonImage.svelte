@@ -4,8 +4,9 @@
 		alt: string;
 		eager?: boolean;
 		size?: number;
+		pixelated?: boolean;
 	}
-	let { src, alt, eager = false, size = 160 }: Props = $props();
+	let { src, alt, eager = false, size = 160, pixelated = false }: Props = $props();
 
 	let loaded = $state(false);
 	let failed = $state(false);
@@ -22,8 +23,10 @@
 			width={size}
 			height={size}
 			loading={eager ? 'eager' : 'lazy'}
+			fetchpriority={eager ? 'high' : 'auto'}
 			decoding="async"
 			class:show={loaded}
+			class:pixelated
 			onload={() => (loaded = true)}
 			onerror={() => (failed = true)}
 		/>
@@ -67,5 +70,9 @@
 	img.show {
 		opacity: 1;
 		transform: scale(1);
+	}
+	img.pixelated {
+		image-rendering: pixelated;
+		filter: drop-shadow(0 4px 6px rgb(16 24 40 / 0.22));
 	}
 </style>

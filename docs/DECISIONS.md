@@ -32,3 +32,7 @@ Why each pinned choice was made, and the notable trade-offs taken along the way.
 ## CI/CD
 
 - **One workflow: verify → deploy.** `verify` installs, lints, checks, unit- and e2e-tests, then builds and uploads the Pages artifact. `deploy` (gated to `main`, with `pages: write` + `id-token: write`) publishes via `actions/deploy-pages`. Keeping deploy dependent on `verify` means a red build never ships.
+
+## Performance
+
+- **Pixel sprites in the grid, artwork on detail.** The list can show 30+ images at once; official-artwork PNGs are ~200 KB each (~4.5 MB total), which dominated LCP under throttling. Grid cards use PokéAPI's pixel `front_default` sprite (~0.6 KB, rendered `image-rendering: pixelated` so it stays crisp) — a ~200× byte reduction — while detail pages keep the full-resolution artwork. This took Lighthouse Performance from ~85 to **98** (LCP 1.1 s, CLS 0.02, TBT 0 ms). Host `preconnect`s and `fetchpriority="high"` on above-the-fold images shave the rest.

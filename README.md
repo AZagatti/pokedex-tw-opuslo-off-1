@@ -30,6 +30,7 @@
 - **❤️ Favorites** — heart any Pokémon from a card or detail page; your collection persists in `localStorage` across reloads.
 - **🌗 Dark / light theme** — a persisted theme toggle that also respects your system preference.
 - **♿ Accessible & tasteful motion** — semantic markup, keyboard focus states, `aria` labels, alt text, and animations that fully honor `prefers-reduced-motion`.
+- **⚡ Fast** — Lighthouse **98 Performance / 100 Accessibility / 100 Best-Practices / 100 SEO** (desktop). Lightweight pixel sprites in the grid, full-resolution artwork on detail pages, an in-memory request cache, and host preconnects.
 
 ## 🧰 Tech stack
 

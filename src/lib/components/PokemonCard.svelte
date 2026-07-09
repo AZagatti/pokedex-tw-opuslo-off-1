@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { base } from '$app/paths';
 	import type { Pokemon } from '$lib/api/schemas';
-	import { dexNumber, formatName, officialArtwork, typeColor } from '$lib/utils/pokemon';
+	import { cardSprite, dexNumber, formatName, typeColor } from '$lib/utils/pokemon';
 	import HeartButton from './HeartButton.svelte';
 	import PokemonImage from './PokemonImage.svelte';
 	import TypeBadge from './TypeBadge.svelte';
@@ -9,7 +9,7 @@
 	let { pokemon, eager = false }: { pokemon: Pokemon; eager?: boolean } = $props();
 
 	const primary = $derived(pokemon.types[0]?.type.name ?? 'normal');
-	const art = $derived(officialArtwork(pokemon));
+	const art = $derived(cardSprite(pokemon));
 </script>
 
 <!--
@@ -28,7 +28,7 @@
 	</div>
 	<div class="art">
 		<div class="glow" aria-hidden="true"></div>
-		<PokemonImage src={art} alt={formatName(pokemon.name)} size={130} {eager} />
+		<PokemonImage src={art} alt={formatName(pokemon.name)} size={120} {eager} pixelated />
 	</div>
 	<h2 class="name">{formatName(pokemon.name)}</h2>
 	<div class="badges">
