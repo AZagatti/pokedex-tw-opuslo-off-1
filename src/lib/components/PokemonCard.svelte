@@ -30,7 +30,7 @@
 		<div class="glow" aria-hidden="true"></div>
 		<PokemonImage src={art} alt={formatName(pokemon.name)} size={130} {eager} />
 	</div>
-	<h3 class="name">{formatName(pokemon.name)}</h3>
+	<h2 class="name">{formatName(pokemon.name)}</h2>
 	<div class="badges">
 		{#each pokemon.types as t (t.type.name)}
 			<TypeBadge type={t.type.name} size="sm" />
