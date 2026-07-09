@@ -1,11 +1,6 @@
 import { ApiError } from "$lib/api/cache";
-import {
-  getEvolutionChainByUrl,
-  getPokemon,
-  getSpecies,
-} from "$lib/api/client";
-import type { EvolutionChain, Pokemon, Species } from "$lib/api/schemas";
-import { idFromUrl } from "$lib/utils/pokemon";
+import { getPokemon } from "$lib/api/client";
+import type { Pokemon } from "$lib/api/schemas";
 import { error } from "@sveltejs/kit";
 
 import type { PageLoad } from "./$types";
@@ -15,19 +10,10 @@ export interface EvoNode {
   id: number;
 }
 
-function flattenChain(chain: EvolutionChain): EvoNode[][] {
-  const stages: EvoNode[][] = [];
-  let level = [chain.chain];
-  while (level.length > 0) {
-    stages.push(
-      level.map((l) => ({ name: l.species.name, id: idFromUrl(l.species.url) }))
-    );
-    level = level.flatMap((l) => l.evolves_to);
-  }
-  return stages;
-}
-
 export const load: PageLoad = async ({ params, fetch }) => {
+  // Only the Pokémon itself blocks the initial render. Species, evolution chain
+  // and flavor text are enrichments fetched client-side (see +page.svelte) so
+  // the page paints as soon as the core data is available.
   let pokemon: Pokemon;
   try {
     pokemon = await getPokemon(params.name, fetch);
@@ -38,27 +24,7 @@ export const load: PageLoad = async ({ params, fetch }) => {
     throw error_;
   }
 
-  let species: Species | null = null;
-  let evolution: EvoNode[][] = [];
-  try {
-    species = await getSpecies(pokemon.id, fetch);
-    if (species.evolution_chain) {
-      const chain = await getEvolutionChainByUrl(
-        species.evolution_chain.url,
-        fetch
-      );
-      evolution = flattenChain(chain);
-    }
-  } catch {
-    // species/evolution are enrichments — tolerate their absence
-  }
-
-  const flavor = species?.flavor_text_entries
-    .find((f) => f.language.name === "en")
-    ?.flavor_text.replaceAll(/[\n\f]/gu, " ");
-  const genus = species?.genera.find((g) => g.language.name === "en")?.genus;
-
-  return { pokemon, evolution, flavor, genus };
+  return { pokemon };
 };
 
 export const prerender = false;

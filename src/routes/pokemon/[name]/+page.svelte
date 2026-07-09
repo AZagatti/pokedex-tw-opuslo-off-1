@@ -7,19 +7,72 @@
 	import PokemonImage from '$lib/components/PokemonImage.svelte';
 	import StatBar from '$lib/components/StatBar.svelte';
 	import TypeBadge from '$lib/components/TypeBadge.svelte';
+	import { getEvolutionChainByUrl, getSpecies } from '$lib/api/client';
+	import type { EvolutionChain as EvoChain } from '$lib/api/schemas';
 	import {
 		STAT_LABELS,
 		dexNumber,
 		formatName,
+		idFromUrl,
 		officialArtwork,
 		statTotal,
 		typeColor
 	} from '$lib/utils/pokemon';
 	import type { PageData } from './$types';
+	import type { EvoNode } from './+page';
 
 	let { data }: { data: PageData } = $props();
 
 	const p = $derived(data.pokemon);
+
+	// Enrichments (flavor text, genus, evolution chain) load client-side so the
+	// page paints immediately from the core Pokémon data.
+	let flavor = $state<string | undefined>();
+	let genus = $state<string | undefined>();
+	let evolution = $state<EvoNode[][]>([]);
+
+	function flattenChain(chain: EvoChain): EvoNode[][] {
+		const stages: EvoNode[][] = [];
+		let level = [chain.chain];
+		while (level.length > 0) {
+			stages.push(
+				level.map((l) => ({ name: l.species.name, id: idFromUrl(l.species.url) }))
+			);
+			level = level.flatMap((l) => l.evolves_to);
+		}
+		return stages;
+	}
+
+	$effect(() => {
+		const { id } = p;
+		let cancelled = false;
+		flavor = undefined;
+		genus = undefined;
+		evolution = [];
+		(async () => {
+			try {
+				const species = await getSpecies(id);
+				if (cancelled) {
+					return;
+				}
+				flavor = species.flavor_text_entries
+					.find((f) => f.language.name === 'en')
+					?.flavor_text.replaceAll(/[\n\f]/gu, ' ');
+				genus = species.genera.find((g) => g.language.name === 'en')?.genus;
+				if (species.evolution_chain) {
+					const chain = await getEvolutionChainByUrl(species.evolution_chain.url);
+					if (!cancelled) {
+						evolution = flattenChain(chain);
+					}
+				}
+			} catch {
+				/* enrichments are optional */
+			}
+		})();
+		return () => {
+			cancelled = true;
+		};
+	});
 	const primary = $derived(p.types[0]?.type.name ?? 'normal');
 	const accent = $derived(typeColor(primary));
 
@@ -70,7 +123,7 @@
 
 <svelte:head>
 	<title>{formatName(p.name)} — Pokédex</title>
-	<meta name="description" content={data.flavor ?? `Details for ${formatName(p.name)}.`} />
+	<meta name="description" content={flavor ?? `Details for ${formatName(p.name)}.`} />
 </svelte:head>
 
 <a class="back" href={`${base}/`}>
@@ -108,7 +161,7 @@
 					<div>
 						<p class="dex tabular">{dexNumber(p.id)}</p>
 						<h1>{formatName(p.name)}</h1>
-						{#if data.genus}<p class="genus">{data.genus}</p>{/if}
+						{#if genus}<p class="genus">{genus}</p>{/if}
 					</div>
 					<HeartButton id={p.id} name={p.name} />
 				</div>
@@ -119,8 +172,8 @@
 					{/each}
 				</div>
 
-				{#if data.flavor}
-					<p class="flavor">{data.flavor}</p>
+				{#if flavor}
+					<p class="flavor">{flavor}</p>
 				{/if}
 
 				<div class="meta">
@@ -186,10 +239,10 @@
 			</section>
 		</div>
 
-		{#if data.evolution.length > 1}
+		{#if evolution.length > 1}
 			<section class="panel">
 				<h2>Evolution</h2>
-				<EvolutionChain stages={data.evolution} current={p.name} />
+				<EvolutionChain stages={evolution} current={p.name} />
 			</section>
 		{/if}
 	</article>

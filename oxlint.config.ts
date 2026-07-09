@@ -26,5 +26,6 @@ export default defineConfig({
     "unicorn/prefer-ternary": "off",
     "unicorn/numeric-separators-style": "off",
     "import/consistent-type-specifier-style": "off",
+    "require-unicode-regexp": "off",
   },
 });
