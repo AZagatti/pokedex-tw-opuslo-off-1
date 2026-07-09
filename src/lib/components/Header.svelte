@@ -28,6 +28,7 @@
 					href={link.href}
 					class="nav-link"
 					class:active={link.match(current)}
+					aria-label={link.label}
 					aria-current={link.match(current) ? 'page' : undefined}
 				>
 					<Icon size={16} />

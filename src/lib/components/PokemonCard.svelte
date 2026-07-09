@@ -12,12 +12,16 @@
 	const art = $derived(officialArtwork(pokemon));
 </script>
 
-<a
-	class="card"
-	href={`${base}/pokemon/${pokemon.name}`}
-	style="--accent: {typeColor(primary)}"
-	data-testid="pokemon-card"
->
+<!--
+	The card is a container with a single stretched overlay link for navigation,
+	so the favorite <button> can live as a sibling (never nested inside an <a>).
+-->
+<div class="card" style="--accent: {typeColor(primary)}" data-testid="pokemon-card">
+	<a
+		class="stretch"
+		href={`${base}/pokemon/${pokemon.name}`}
+		aria-label={formatName(pokemon.name)}
+	></a>
 	<div class="top">
 		<span class="dex tabular">{dexNumber(pokemon.id)}</span>
 		<HeartButton id={pokemon.id} name={pokemon.name} />
@@ -32,7 +36,7 @@
 			<TypeBadge type={t.type.name} size="sm" />
 		{/each}
 	</div>
-</a>
+</div>
 
 <style>
 	.card {
@@ -91,7 +95,19 @@
 	.card:active {
 		transform: translateY(-2px) scale(0.99);
 	}
+	.stretch {
+		position: absolute;
+		inset: 0;
+		z-index: 1;
+		border-radius: inherit;
+	}
+	.stretch:focus-visible {
+		outline: 2px solid var(--color-brand);
+		outline-offset: -3px;
+	}
 	.top {
+		position: relative;
+		z-index: 2;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;

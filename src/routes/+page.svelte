@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { untrack } from 'svelte';
 	import { SearchX } from 'lucide-svelte';
 	import { getGeneration, getPokemon, getType } from '$lib/api/client';
 	import type { Pokemon } from '$lib/api/schemas';
@@ -116,10 +117,11 @@
 
 	const slice = $derived(filtered.slice(0, shownCount));
 
-	// Fetch details for the current slice
+	// Fetch details for the current slice. `details` is read via untrack so this
+	// effect only re-runs when the slice changes, not when its own writes land.
 	$effect(() => {
 		for (const entry of slice) {
-			if (!details.has(entry.name)) {
+			if (!untrack(() => details.has(entry.name))) {
 				getPokemon(entry.name)
 					.then((p) => {
 						details.set(entry.name, p);

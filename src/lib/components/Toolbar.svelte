@@ -117,6 +117,7 @@
 							class:active={gen === g.id}
 							onclick={() => selectGen(g.id)}
 							title={g.region}
+							aria-label={`${g.label} — ${g.region}`}
 							aria-pressed={gen === g.id}
 						>
 							{g.label}
