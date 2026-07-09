@@ -1,0 +1,166 @@
+- generic [ref=f15e3]:
+    - banner [ref=f15e4]:
+        - generic [ref=f15e5]:
+            - link "Pokédex home" [ref=f15e6] [cursor=pointer]:
+                - /url: /
+                - generic [ref=f15e8]:
+                    - text: Poké
+                    - strong [ref=f15e9]: dex
+            - navigation "Primary" [ref=f15e10]:
+                - link "Pokédex" [ref=f15e11] [cursor=pointer]:
+                    - /url: /
+                    - img [ref=f15e12]
+                    - generic [ref=f15e13]: Pokédex
+                - link "Berries" [ref=f15e14] [cursor=pointer]:
+                    - /url: /berries
+                    - img [ref=f15e15]
+                    - generic [ref=f15e16]: Berries
+                - link "Favorites 2" [ref=f15e17] [cursor=pointer]:
+                    - /url: /favorites
+                    - img [ref=f15e18]
+                    - generic [ref=f15e19]: Favorites
+                    - generic [ref=f15e20]: "2"
+            - button "Switch to light theme" [ref=f15e21] [cursor=pointer]:
+                - img [ref=f15e23]
+    - main [ref=f15e24]:
+        - generic [ref=f15e25]:
+            - heading "Explore the Pokédex" [level=1] [ref=f15e26]
+            - paragraph [ref=f15e27]: 1,351 Pokémon at your fingertips. Search, filter by generation or type, and build your favorites.
+        - generic [ref=f15e29]:
+            - generic [ref=f15e30]:
+                - img
+                - searchbox "Search Pokémon by name" [ref=f15e31]: char
+                - button "Clear search" [ref=f15e32] [cursor=pointer]:
+                    - img [ref=f15e33]
+            - generic [ref=f15e34]:
+                - generic [ref=f15e35]:
+                    - generic [ref=f15e36]: Sort by
+                    - combobox "Sort Pokémon" [ref=f15e37] [cursor=pointer]:
+                        - 'option "Sort: Dex №" [selected]'
+                        - 'option "Sort: Base stat total"'
+                - button "Filters" [ref=f15e38] [cursor=pointer]:
+                    - img [ref=f15e39]
+                    - generic [ref=f15e40]: Filters
+                - button "Clear" [ref=f15e41] [cursor=pointer]:
+                    - img [ref=f15e42]
+                    - text: Clear
+        - paragraph [ref=f15e43]: 10 results
+        - list [ref=f15e44]:
+            - listitem [ref=f15e45]:
+                - link "#0004 Add Charmander to favorites Charmander Charmander Fire" [ref=f15e46] [cursor=pointer]:
+                    - /url: /pokemon/charmander
+                    - generic [ref=f15e47]:
+                        - generic [ref=f15e48]: "#0004"
+                        - button "Add Charmander to favorites" [ref=f15e49]:
+                            - img [ref=f15e50]
+                    - img "Charmander" [ref=f15e54]
+                    - heading "Charmander" [level=3] [ref=f15e55]
+                    - generic [ref=f15e57]: Fire
+            - listitem [ref=f15e58]:
+                - link "#0005 Add Charmeleon to favorites Charmeleon Charmeleon Fire" [ref=f15e59] [cursor=pointer]:
+                    - /url: /pokemon/charmeleon
+                    - generic [ref=f15e60]:
+                        - generic [ref=f15e61]: "#0005"
+                        - button "Add Charmeleon to favorites" [ref=f15e62]:
+                            - img [ref=f15e63]
+                    - img "Charmeleon" [ref=f15e67]
+                    - heading "Charmeleon" [level=3] [ref=f15e68]
+                    - generic [ref=f15e70]: Fire
+            - listitem [ref=f15e71]:
+                - link "#0006 Remove Charizard from favorites Charizard Charizard Fire Flying" [ref=f15e72] [cursor=pointer]:
+                    - /url: /pokemon/charizard
+                    - generic [ref=f15e73]:
+                        - generic [ref=f15e74]: "#0006"
+                        - button "Remove Charizard from favorites" [pressed] [ref=f15e75]:
+                            - img [ref=f15e76]
+                    - img "Charizard" [ref=f15e80]
+                    - heading "Charizard" [level=3] [ref=f15e81]
+                    - generic [ref=f15e82]:
+                        - generic [ref=f15e83]: Fire
+                        - generic [ref=f15e84]: Flying
+            - listitem [ref=f15e85]:
+                - link "#0390 Add Chimchar to favorites Chimchar Chimchar Fire" [ref=f15e86] [cursor=pointer]:
+                    - /url: /pokemon/chimchar
+                    - generic [ref=f15e87]:
+                        - generic [ref=f15e88]: "#0390"
+                        - button "Add Chimchar to favorites" [ref=f15e89]:
+                            - img [ref=f15e90]
+                    - img "Chimchar" [ref=f15e94]
+                    - heading "Chimchar" [level=3] [ref=f15e95]
+                    - generic [ref=f15e97]: Fire
+            - listitem [ref=f15e98]:
+                - link "#0737 Add Charjabug to favorites Charjabug Charjabug Bug Electric" [ref=f15e99] [cursor=pointer]:
+                    - /url: /pokemon/charjabug
+                    - generic [ref=f15e100]:
+                        - generic [ref=f15e101]: "#0737"
+                        - button "Add Charjabug to favorites" [ref=f15e102]:
+                            - img [ref=f15e103]
+                    - img "Charjabug" [ref=f15e107]
+                    - heading "Charjabug" [level=3] [ref=f15e108]
+                    - generic [ref=f15e109]:
+                        - generic [ref=f15e110]: Bug
+                        - generic [ref=f15e111]: Electric
+            - listitem [ref=f15e112]:
+                - link "#0935 Add Charcadet to favorites Charcadet Charcadet Fire" [ref=f15e113] [cursor=pointer]:
+                    - /url: /pokemon/charcadet
+                    - generic [ref=f15e114]:
+                        - generic [ref=f15e115]: "#0935"
+                        - button "Add Charcadet to favorites" [ref=f15e116]:
+                            - img [ref=f15e117]
+                    - img "Charcadet" [ref=f15e121]
+                    - heading "Charcadet" [level=3] [ref=f15e122]
+                    - generic [ref=f15e124]: Fire
+            - listitem [ref=f15e125]:
+                - link "#1025 Add Pecharunt to favorites Pecharunt Pecharunt Poison Ghost" [ref=f15e126] [cursor=pointer]:
+                    - /url: /pokemon/pecharunt
+                    - generic [ref=f15e127]:
+                        - generic [ref=f15e128]: "#1025"
+                        - button "Add Pecharunt to favorites" [ref=f15e129]:
+                            - img [ref=f15e130]
+                    - img "Pecharunt" [ref=f15e134]
+                    - heading "Pecharunt" [level=3] [ref=f15e135]
+                    - generic [ref=f15e136]:
+                        - generic [ref=f15e137]: Poison
+                        - generic [ref=f15e138]: Ghost
+            - listitem [ref=f15e139]:
+                - link "#10034 Add Charizard Mega X to favorites Charizard Mega X Charizard Mega X Fire Dragon" [ref=f15e140] [cursor=pointer]:
+                    - /url: /pokemon/charizard-mega-x
+                    - generic [ref=f15e141]:
+                        - generic [ref=f15e142]: "#10034"
+                        - button "Add Charizard Mega X to favorites" [ref=f15e143]:
+                            - img [ref=f15e144]
+                    - img "Charizard Mega X" [ref=f15e148]
+                    - heading "Charizard Mega X" [level=3] [ref=f15e149]
+                    - generic [ref=f15e150]:
+                        - generic [ref=f15e151]: Fire
+                        - generic [ref=f15e152]: Dragon
+            - listitem [ref=f15e153]:
+                - link "#10035 Add Charizard Mega Y to favorites Charizard Mega Y Charizard Mega Y Fire Flying" [ref=f15e154] [cursor=pointer]:
+                    - /url: /pokemon/charizard-mega-y
+                    - generic [ref=f15e155]:
+                        - generic [ref=f15e156]: "#10035"
+                        - button "Add Charizard Mega Y to favorites" [ref=f15e157]:
+                            - img [ref=f15e158]
+                    - img "Charizard Mega Y" [ref=f15e162]
+                    - heading "Charizard Mega Y" [level=3] [ref=f15e163]
+                    - generic [ref=f15e164]:
+                        - generic [ref=f15e165]: Fire
+                        - generic [ref=f15e166]: Flying
+            - listitem [ref=f15e167]:
+                - link "#10196 Add Charizard Gmax to favorites Charizard Gmax Charizard Gmax Fire Flying" [ref=f15e168] [cursor=pointer]:
+                    - /url: /pokemon/charizard-gmax
+                    - generic [ref=f15e169]:
+                        - generic [ref=f15e170]: "#10196"
+                        - button "Add Charizard Gmax to favorites" [ref=f15e171]:
+                            - img [ref=f15e172]
+                    - img "Charizard Gmax" [ref=f15e176]
+                    - heading "Charizard Gmax" [level=3] [ref=f15e177]
+                    - generic [ref=f15e178]:
+                        - generic [ref=f15e179]: Fire
+                        - generic [ref=f15e180]: Flying
+    - contentinfo [ref=f15e181]:
+        - paragraph [ref=f15e182]:
+            - text: Data from
+            - link "PokéAPI" [ref=f15e183] [cursor=pointer]:
+                - /url: https://pokeapi.co
+            - text: . Built with SvelteKit + Svelte 5.

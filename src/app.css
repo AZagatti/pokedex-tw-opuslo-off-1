@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+/* Dark mode driven by a class on <html> (toggled by the theme store). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans:
+    "Inter var", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, sans-serif;
+
+  --color-surface: #ffffff;
+  --color-surface-2: #f4f6fb;
+  --color-ink: #1a1d29;
+  --color-ink-soft: #5b6474;
+  --color-line: #e5e9f2;
+  --color-brand: #ef5350;
+  --color-brand-deep: #c62828;
+
+  --radius-card: 1.25rem;
+  --shadow-card:
+    0 1px 2px rgb(16 24 40 / 0.04), 0 8px 24px -12px rgb(16 24 40 / 0.18);
+  --shadow-lift:
+    0 4px 8px rgb(16 24 40 / 0.06), 0 24px 48px -16px rgb(16 24 40 / 0.28);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root {
+  --bg: #f4f6fb;
+  --bg-grid: #e9edf6;
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+  --ink: #1a1d29;
+  --ink-soft: #5b6474;
+  --line: #e5e9f2;
+  color-scheme: light;
+}
+
+:root.dark {
+  --bg: #0c0e16;
+  --bg-grid: #141826;
+  --surface: #171a26;
+  --surface-2: #1e2231;
+  --ink: #eef1f8;
+  --ink-soft: #99a2b6;
+  --line: #262c3d;
+  color-scheme: dark;
+}
+
+html {
+  background: var(--bg);
+  color: var(--ink);
+  scrollbar-gutter: stable;
+}
+
+body {
+  min-height: 100dvh;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  background-image:
+    radial-gradient(
+      1200px 600px at 80% -10%,
+      color-mix(in srgb, var(--color-brand) 8%, transparent),
+      transparent
+    ),
+    linear-gradient(var(--bg-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--bg-grid) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    28px 28px,
+    28px 28px;
+  background-attachment: fixed;
+}
+
+/* Focus ring — visible, consistent, keyboard-only. */
+:where(a, button, input, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes float-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--ink-soft) 12%, transparent);
+}
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--surface) 60%, transparent),
+    transparent
+  );
+  animation: shimmer 1.4s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .skeleton::after {
+    display: none;
+  }
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
